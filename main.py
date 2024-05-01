@@ -4,14 +4,20 @@ def main():
     word_total= word_count(text)
     lowercase_words=text_lowercase(text).split()
     letter_dict=letter_count(lowercase_words)
-    print_count=sort_on(letter_dict)
+    print_count=sort_highest(letter_dict)
     print("--- Filepath: books/frankenstein.txt ---")
     print(f'{word_total} words found in the document')
     print(f'{print_count}')
 
-def sort_on(letter_dict):
-    print(letter_dict)
-    pass
+def sort_on(dict):
+    return dict["num"]
+
+def sort_highest(letter_dict):
+    highest_count=[]
+    for letter in letter_dict:
+        highest_count.append({"Letter": letter, "num": letter_dict[letter]})
+    highest_count.sort(reverse=True, key=sort_on)
+    return highest_count
 
 def letter_count(lowercase_words):
     text_dict={}
