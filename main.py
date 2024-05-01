@@ -4,19 +4,37 @@ def main():
     word_total= word_count(text)
     lowercase_words=text_lowercase(text).split()
     letter_dict=letter_count(lowercase_words)
-    # lowercase_words_flattend=lowercase_words.concat()
+    print_count=sort_on(letter_dict)
+    print("--- Filepath: books/frankenstein.txt ---")
     print(f'{word_total} words found in the document')
-    # print(f'Lowercase {lowercase_words}')
-    print(f'{letter_dict}')
+    print(f'{print_count}')
+
+def sort_on(letter_dict):
+    print(letter_dict)
+    pass
 
 def letter_count(lowercase_words):
-    total_text_array=[]
+    text_dict={}
+    #Loop over each word
     for word in lowercase_words:
+        #Loop over each character in that space
         for character in word:
-            total_text_array.append(character)
-    print(total_text_array)
-    # print(items(total_text_array))
+            #Check if the character is a letter "A or a" for ex
+            #AND if it is NOT already in the dictionary. Set the key, and its value is 1
+            if character.isalpha() and character not in text_dict:
+                text_dict[character]=1
+            #If the character is already in the key for the dict, increment 1
+            elif character.isalpha() and character in text_dict:
+                text_dict[character]+=1
 
+    #Sort the dictionary keys
+    sorted_dict=sorted(text_dict)
+    #initialize new dictionary to set keys, then take values from our dict
+    #those values will be assigned to the keys in alphabetical order
+    final_dict={}
+    for letter in sorted_dict:
+        final_dict[letter]=text_dict[letter]
+    return final_dict
 
 def book_text_open(bookpath):
     with open(bookpath) as f:
