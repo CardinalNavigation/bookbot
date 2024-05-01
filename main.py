@@ -1,13 +1,19 @@
 def main(): 
+    #Reach into Book Folder and Grab this text, used relative file path
     bookpath = "books/frankenstein.txt"
+    #
     text=book_text_open(bookpath)
     word_total= word_count(text)
     lowercase_words=text_lowercase(text).split()
     letter_dict=letter_count(lowercase_words)
     print_count=sort_highest(letter_dict)
+        
     print("--- Filepath: books/frankenstein.txt ---")
     print(f'{word_total} words found in the document')
-    print(f'{print_count}')
+    for item in print_count:
+        print(f'The letter {item["Letter"]} was found {item["num"]} times')
+    # print(f'{print_count}')
+    print("--- Report End ---")
 
 def sort_on(dict):
     return dict["num"]
@@ -42,10 +48,6 @@ def letter_count(lowercase_words):
         final_dict[letter]=text_dict[letter]
     return final_dict
 
-def book_text_open(bookpath):
-    with open(bookpath) as f:
-        file_contents = f.read()
-        return file_contents
 
 def word_count(text):
     words=text.split()
@@ -55,4 +57,8 @@ def text_lowercase(text):
     lowercase=text.lower()
     return lowercase
 
+def book_text_open(bookpath):
+    with open(bookpath) as f:
+        file_contents = f.read()
+        return file_contents
 main()
